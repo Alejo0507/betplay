@@ -8,7 +8,7 @@ public class HandleInput {
         @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         System.out.println(message);
-        String data = sc.nextLine();
+        String data = sc.nextLine().toLowerCase();
         return data;
     }
 

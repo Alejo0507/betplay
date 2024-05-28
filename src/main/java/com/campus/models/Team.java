@@ -92,8 +92,6 @@ public class Team {
         switch (key) {
             case "gf":
                 return gf;
-
-
             case "tp":
                 return tp;
 

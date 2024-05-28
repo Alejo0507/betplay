@@ -1,9 +1,5 @@
 package com.campus.views;
 
-
-import java.util.Collections;
-import java.util.Comparator;
-
 import com.campus.controllers.Data;
 import com.campus.models.Team;
 import com.campus.utilities.HandleErrors;
@@ -76,38 +72,43 @@ public class Menu {
     }
 
     public static void subMenuReports(){
-        String option;
-        do{
-            option = HandleInput.getString(subMenuReport);
-            switch (option) {
-                case "a":
-                    //Data.sortList("gf");
-                    Team maxTeam = Collections.max(Data.teams, Comparator.comparingInt(Team::getGf));
-                    System.err.println(maxTeam.toString());
-                    break;
-                case "b":
-                    Data.sortList("tp");
-                    break;
-
-                case "c":
-                    Data.sortList("pg");
-                    break;
-
-                case "d":
-                    Data.totalGoals();
-                    break;
-
-                case "e":
-                    Data.meanGoals();
-                    break;
-
-                case "f":
-                    return;
-                
-                default:
-                    HandleErrors.showError("option", "");
-                    break;
-            }
-        }while(option != "f");
+        if (Data.teams.size() < 1) {
+            HandleErrors.showError("teams min size", "Registra mas equipos");
+        } else {
+            String option;
+            do{
+                option = HandleInput.getString(subMenuReport);
+                switch (option) {
+                    case "a":
+                        Data.findMax("gf");
+                        break;
+                    case "b":
+                        Data.findMax("tp");
+                        break;
+    
+                    case "c":
+                        Data.findMax("pg");
+                        break;
+    
+                    case "d":
+                        System.err.println("Total Goles: " + Data.getTotals("gf"));
+                        HandleInput.pause();
+                        break;
+    
+                    case "e":
+                        System.err.println("Total Goles: " + (Data.getTotals("gf")/Data.teams.size()));
+                        HandleInput.pause();
+                        break;
+    
+                    case "f":
+                        return;
+                    
+                    default:
+                        HandleErrors.showError("option", "");
+                        break;
+                }
+            }while(option != "f");
+        }
+       
     }
 }

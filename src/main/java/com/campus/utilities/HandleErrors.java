@@ -6,23 +6,22 @@ import java.util.Scanner;
 public class HandleErrors {
 
 
-    public static void showError(String type, String error) {
+    public static void showError(String error, String errorM) {
         @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
-        
-        switch (type) {
-            case "option":
-                System.out.println("""
+        if (error == "option") {
+            errorM = """
 
-
-                Opción No Reconocida..... 
-                Enter Para Continuar""");
-                break;
-        
-            default:
-                System.out.println(error);
-                break;
+            Opción No Reconocida..... """;
         }
+        System.out.println("""
+                
+        %s
+
+        """.formatted(errorM));
+      
+        System.out.println("""
+        Enter Para Continuar...""");
         sc.nextLine();
 
     }

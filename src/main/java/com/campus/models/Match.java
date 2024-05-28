@@ -1,5 +1,9 @@
 package com.campus.models;
 
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import com.campus.controllers.Data;
 import com.campus.utilities.HandleErrors;
 import com.campus.utilities.HandleInput;
@@ -14,7 +18,8 @@ public class Match {
 
 
     public Match(Team localTeam, Team visitTeam, int localTeamGoals, int visitTeamGoals) {
-        this.date = "28-05-2023";
+        //SQL DATETIME FORMAT
+        this.date = LocalDateTime.now().format((DateTimeFormatter.ofPattern("YYYY-MM-DD hh:mm:ss")));
         this.localTeam = localTeam;
         this.visitTeam = visitTeam;
         this.localTeamGoals = localTeamGoals;
