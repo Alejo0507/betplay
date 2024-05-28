@@ -1,11 +1,14 @@
 package com.campus.views;
 
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import com.campus.controllers.Data;
 import com.campus.models.Team;
 import com.campus.utilities.HandleErrors;
 import com.campus.utilities.HandleInput;
-
+import com.campus.models.Match;
 
 
 public class Menu {
@@ -44,13 +47,18 @@ public class Menu {
                 case 1:
                     do {
                         String name = HandleInput.getString("Ingresa el Nombre del Equipo");
-                        Team team = new Team(name);
-                        Data.teams.add(team);
+                        if (Data.findTeamByName(name) == null) {
+                            Team team = new Team(name);
+                            Data.teams.add(team);
+                        } else {
+                            HandleErrors.showError("duplicate key", "El Nombre del equipo ya esta registrado");
+                        }
+                        
                     } while (HandleInput.yesOrNot("Desea Ingresar otro Equipo?"));
                    
                     break;
                 case 2:
-                    
+                    Match.newMatch();
                     break;
 
                 case 3:
@@ -73,20 +81,24 @@ public class Menu {
             option = HandleInput.getString(subMenuReport);
             switch (option) {
                 case "a":
-                    Data.showTeams();
+                    //Data.sortList("gf");
+                    Team maxTeam = Collections.max(Data.teams, Comparator.comparingInt(Team::getGf));
+                    System.err.println(maxTeam.toString());
                     break;
                 case "b":
-                    System.out.println("2");
+                    Data.sortList("tp");
                     break;
 
                 case "c":
-                    System.out.println("2");
+                    Data.sortList("pg");
                     break;
 
                 case "d":
+                    Data.totalGoals();
                     break;
 
                 case "e":
+                    Data.meanGoals();
                     break;
 
                 case "f":

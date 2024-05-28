@@ -1,5 +1,6 @@
 package com.campus.models;
 
+
 import com.campus.controllers.Data;
 
 public class Team {
@@ -87,12 +88,23 @@ public class Team {
         return tp;
     }
 
+    public int getKeyValue(String key){
+        switch (key) {
+            case "gf":
+                return gf;
 
 
-    public void incrementMatchesPlayed() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'incrementMatchesPlayed'");
+            case "tp":
+                return tp;
+
+            case "pg":
+                return pg;
+        
+            default:
+                return gc;
+        }
     }
+
 
 }
 

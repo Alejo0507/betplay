@@ -19,7 +19,10 @@ public class HandleInput {
                 Scanner sc = new Scanner(System.in);
                 System.out.println(message);
                 int data = sc.nextInt();
-                return data;
+                if(data >= 0){
+                    return data;
+                }
+                System.out.println("Ingresa Valores Positivos");
             } catch (Exception e) {
                 System.out.println("Error al ingresar el Dato");
             }

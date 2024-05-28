@@ -2,6 +2,7 @@ package com.campus.utilities;
 
 import java.util.Scanner;
 
+
 public class HandleErrors {
 
 
@@ -25,5 +26,7 @@ public class HandleErrors {
         sc.nextLine();
 
     }
+
+  
 
 }
