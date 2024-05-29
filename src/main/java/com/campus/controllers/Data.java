@@ -43,6 +43,17 @@ public class Data {
         return total;
     }
 
+    public static Boolean checkEqualsPJ(){
+        int pj = teams.get(0).getPj();
+        for(Team team: teams){
+            if (pj != team.getPj()) {
+                return true;
+            }
+            pj = team.getPj();
+        }
+        return false;
+    }
+
     // public static void sortList(String key) {
     //     Team team = MergeSort.mergeSort(teams, key).get(teams.size() - 1);
     //     System.err.println(team.toString());

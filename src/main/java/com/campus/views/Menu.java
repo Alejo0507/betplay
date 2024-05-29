@@ -75,6 +75,9 @@ public class Menu {
         if (Data.teams.size() < 1) {
             HandleErrors.showError("teams min size", "Registra mas equipos");
         } else {
+            if(Data.checkEqualsPJ()){
+                HandleErrors.showError("match not equals", "Los Equipos no tienen el mismo Numero de Partidos Jugados");
+            }
             String option;
             do{
                 option = HandleInput.getString(subMenuReport);
