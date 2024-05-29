@@ -26,7 +26,7 @@ public class Match {
         this.visitTeamGoals = visitTeamGoals;
     }
 
-    public static void loadScore(Team localTeam, Team visitTeam, int localTeamGoals, int visitTeamGoals){
+    /*public static void loadScore(Team localTeam, Team visitTeam, int localTeamGoals, int visitTeamGoals){
         if (localTeamGoals > visitTeamGoals) {
             localTeam.setPj(1);
             localTeam.setPg(1);
@@ -61,6 +61,7 @@ public class Match {
         }
         return;
     }
+    */ 
 
     public static void newMatch(){
         if (Data.teams.size() < 2) {
@@ -71,11 +72,13 @@ public class Match {
                 Team localTeam = Data.findTeamByName(HandleInput.getString("Ingresa el Nombre del Equipo Local"));
                 if (localTeam != null) {
                     Team visitTeam = Data.findTeamByName(HandleInput.getString("Ingresa el Nombre del Equipo Visitante"));
-                    if (visitTeam != null) {
-                        int localTeamGoals = HandleInput.getInt("Ingresa goles de "+ localTeam.getName());
-                        int visitTeamGoals = HandleInput.getInt("Ingresa goles de "+ visitTeam.getName());
+                    if (visitTeam != null && !visitTeam.getName().equals(localTeam.getName())) {
+                        int localTeamGoals = HandleInput.getInt("Ingresa goles del Equipo Local "+ localTeam.getName());
+                        int visitTeamGoals = HandleInput.getInt("Ingresa goles del Equipo Visitante "+ visitTeam.getName());
                         Data.matches.add(new Match(localTeam, visitTeam, localTeamGoals, visitTeamGoals));
-                        loadScore(localTeam, visitTeam, localTeamGoals, visitTeamGoals);
+                        //loadScore(localTeam, visitTeam, localTeamGoals, visitTeamGoals);
+                        localTeam.uploadStatistics(localTeamGoals, visitTeamGoals);
+                        visitTeam.uploadStatistics(visitTeamGoals, localTeamGoals);
                         message = "Desea Ingresar otro Resultado de un Partido?";
                     } else {
                         HandleErrors.showError("not found", "Equipo Visitante no encontrado");

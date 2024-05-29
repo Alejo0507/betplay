@@ -33,7 +33,9 @@ public class HandleInput {
         do {
             @SuppressWarnings("resource")
             Scanner sc = new Scanner(System.in);
-            System.out.println(message + " Si(s) o No(n)");
+            System.out.println("""
+                
+            %s Si(s) o No(n)""".formatted(message));
             String data = sc.nextLine().toLowerCase();
             switch (data) {
                 case "s":
@@ -43,7 +45,9 @@ public class HandleInput {
                     return false;
             
                 default:
-                    System.out.println("Opción no Valida ");
+                    System.out.println("""
+                        Opción no Valida 
+                            """);
                     break;
             }
             
@@ -53,7 +57,9 @@ public class HandleInput {
     public static void pause(){
         @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
-        System.out.println("Presione Enter Para Continuar.....");
+        System.out.println("""
+            Presione Enter Para Continuar.....
+                """);
         sc.nextLine();
     }
 

@@ -103,6 +103,22 @@ public class Team {
         }
     }
 
+    public void uploadStatistics(int gf, int gc) {
+        this.pj++;
+        this.gf += gf;
+        this.gc += gc ;
+
+        if (gf > gc) {
+            this.pg++;
+            this.tp += 3;
+        } else if (gf < gc) {
+            this.pp++;
+        } else {
+            this.pe++;
+            this.tp++;
+        }
+    }
+
 
 }
 
