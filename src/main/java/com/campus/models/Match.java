@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
 import com.campus.controllers.Data;
 import com.campus.utilities.HandleErrors;
 import com.campus.utilities.HandleInput;
+import com.campus.views.Dialogs;
+import com.campus.views.Home;
 
 public class Match {
     String date;
@@ -63,6 +65,7 @@ public class Match {
     }
     */ 
 
+    /* 
     public static void newMatch(){
         if (Data.teams.size() < 2) {
             HandleErrors.showError("teams min size", "Registra mas equipos");
@@ -89,6 +92,35 @@ public class Match {
 
             } while (HandleInput.yesOrNot(message));
         }  
+    }
+    */
+
+    public static void newMatch(String localGoals, String visitGoals){
+        Team localTeam = Dialogs.localTeam;
+        Team visitTeam = Dialogs.visitTeam;
+        if (localTeam != null) {
+            if (!visitTeam.getName().equals(localTeam.getName())) {
+                try {
+                    int localTeamGoals = Integer.parseInt(localGoals);
+                    int visitTeamGoals = Integer.parseInt(visitGoals);
+                    Data.matches.add(new Match(localTeam, visitTeam, localTeamGoals, visitTeamGoals));
+                    //loadScore(localTeam, visitTeam, localTeamGoals, visitTeamGoals);
+                    localTeam.uploadStatistics(localTeamGoals, visitTeamGoals);
+                    visitTeam.uploadStatistics(visitTeamGoals, localTeamGoals);
+                    Dialogs.dialog.setVisible(false);
+                    HandleErrors.showSuccessful("Team Update", "Se Guardo correctamente");
+                    Data.sortList();
+                    Home.showMenu();
+                } catch (Exception e) {
+                    HandleErrors.showError("input", e.getMessage());
+                }
+               
+            }else{
+                HandleErrors.showError("equals name", "El "+ localTeam.getName() + " No Puede Jugar contra el " + visitTeam.getName());
+            }
+        } else {
+            HandleErrors.showError("not found", "Equipo Local no encontrado");
+        }
     }
     
 }

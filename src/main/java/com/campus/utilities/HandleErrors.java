@@ -11,6 +11,9 @@ public class HandleErrors {
         JOptionPane.showMessageDialog(null,errorM , error , JOptionPane.ERROR_MESSAGE);
     }
 
+    public static void showSuccessful(String information, String informationM) {
+        JOptionPane.showMessageDialog(null,informationM , information , JOptionPane.INFORMATION_MESSAGE);
+    }
   
 
 }

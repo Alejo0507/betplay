@@ -10,6 +10,7 @@ import com.campus.models.Match;
 import com.campus.models.Person;
 import com.campus.models.Team;
 import com.campus.utilities.HandleInput;
+import com.campus.utilities.MergeSort;
 
 
 public class Data {
@@ -67,11 +68,21 @@ public class Data {
         
     }
 
-    // public static void sortList(String key) {
-    //     Team team = MergeSort.mergeSort(teams, key).get(teams.size() - 1);
-    //     System.err.println(team.toString());
-    //     HandleInput.pause();
-    // }
+    public static void sortList() {
+        Collections.sort(teams, new Comparator<Team>() {
+            @Override
+            public int compare(Team equipo1, Team equipo2) {
+                // Comparamos por puntos
+                if (equipo1.getTp() != equipo2.getTp()) {
+                    return equipo2.getTp() - equipo1.getTp();
+                }
+                // Si hay empate en puntos, comparamos por goles en contra
+                else {
+                    return equipo1.getGc() - equipo2.getGc();
+                }
+            }
+        });
+    }
     
     // public static void printData(){
     //     for (Team team : teams) {

@@ -11,6 +11,7 @@ public class PositionsTable {
 
     public static JTable loadPositionTable(){
         
+
         // Definir los nombres de las columnas
         String[] columnNames = {"NOMBRE DEL EQUIPO", "PJ", "PG", "PP", "PE", "GF", "GC", "TP"};
 
