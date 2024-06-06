@@ -2,56 +2,38 @@ package com.campus.utilities;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class HandleInput {
 
      public static String getString(String message){
-        @SuppressWarnings("resource")
-        Scanner sc = new Scanner(System.in);
-        System.out.println(message);
-        String data = sc.nextLine().toLowerCase();
-        return data;
+        String data = JOptionPane.showInputDialog(message);
+        return data == null ? data : data.toLowerCase();
     }
 
-    public static int getInt(String message){
+    public static int getInt(String message) {
         while (true) {
+            String inputData = JOptionPane.showInputDialog(message);
             try {
-                @SuppressWarnings("resource")
-                Scanner sc = new Scanner(System.in);
-                System.out.println(message);
-                int data = sc.nextInt();
-                if(data >= 0){
+                // Convertir la entrada de String a int
+                int data = Integer.parseInt(inputData);
+                if (data >= 0) {
                     return data;
+                } else {
+                    HandleErrors.showError("Invalid Entry", data + " is a negative number");
                 }
-                System.out.println("Ingresa Valores Positivos");
-            } catch (Exception e) {
-                System.out.println("Error al ingresar el Dato");
+            } catch (NumberFormatException e) {
+                HandleErrors.showError("Invalid Entry", inputData + " is not a number");
             }
         }
     }
 
     public static Boolean yesOrNot(String message){
-        do {
-            @SuppressWarnings("resource")
-            Scanner sc = new Scanner(System.in);
-            System.out.println("""
-                
-            %s Si(s) o No(n)""".formatted(message));
-            String data = sc.nextLine().toLowerCase();
-            switch (data) {
-                case "s":
-                    return true;
-
-                case "n":
-                    return false;
-            
-                default:
-                    System.out.println("""
-                        Opción no Valida 
-                            """);
-                    break;
-            }
-            
-        } while (true);
+        int n = JOptionPane.showConfirmDialog(
+        null,
+        message,
+        "-----", JOptionPane.YES_NO_OPTION);
+        return n == 0 ? true : false;
     }
 
     public static void pause(){

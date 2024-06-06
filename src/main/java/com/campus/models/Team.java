@@ -2,6 +2,9 @@ package com.campus.models;
 
 
 import com.campus.controllers.Data;
+import com.campus.utilities.HandleErrors;
+import com.campus.utilities.HandleInput;
+import com.campus.views.Home;
 
 public class Team {
     int id;
@@ -18,8 +21,22 @@ public class Team {
         this.id = Data.teams.size() + 1;
         this.name = name;
     }
-
     
+    
+
+    public Team(String name, int pj, int pg, int pe, int pp,  int gf, int gc, int tp) {
+        this.id = Data.teams.size() + 1;
+        this.name = name;
+        this.pj = pj;
+        this.pg = pg;
+        this.pp = pp;
+        this.pe = pe;
+        this.gf = gf;
+        this.gc = gc;
+        this.tp = tp;
+    }
+
+
 
     public String getName() {
         return name;
@@ -101,6 +118,20 @@ public class Team {
             default:
                 return gc;
         }
+    }
+
+    public static void addTeam(){
+        String name = HandleInput.getString("Nombre del Equipo");
+        if (name != null) {
+            if (Data.findTeamByName(name) == null) {
+                Team team = new Team(name);
+                Data.teams.add(team);
+                Home.showMenu();
+                return;
+            }else{
+                HandleErrors.showError("Duplicate entry", name + " Exist");
+            }
+        } 
     }
 
     public void uploadStatistics(int gf, int gc) {
